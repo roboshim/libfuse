@@ -1,3 +1,20 @@
+libfuse 3.2.5 (2018-07-24)
+==========================
+
+* SECURITY UPDATE: In previous versions of libfuse it was possible to
+  for unprivileged users to specify the `allow_other` option even when
+  this was forbidden in `/etc/fuse.conf`.  The vulnerability is
+  present only on systems where SELinux is active (including in
+  permissive mode).
+* The fusermount binary has been hardened in several ways to reduce
+  potential attack surface. Most importantly, mountpoints and mount
+  options must now match a hard-coded whitelist. It is expected that
+  this whitelist covers all regular use-cases.
+* Added a test of `seekdir` to test_syscalls.
+* Fixed `readdir` bug when non-zero offsets are given to filler and the
+  filesystem client, after reading a whole directory, re-reads it from a
+  non-zero offset e. g. by calling `seekdir` followed by `readdir`.
+
 libfuse 3.2.4 (2018-07-11)
 ==========================
 
